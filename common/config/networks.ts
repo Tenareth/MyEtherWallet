@@ -203,14 +203,23 @@ const EXP: NetworkConfig = {
   }
 };
 
+const EPQ: NetworkConfig = {
+  name: 'EPQ,
+  unit: 'ETH',
+  chainId: 99999,
+  color: '#673ab7',
+  blockExplorer: makeExplorer('http://etherdmhnd5i.centralus.cloudapp.azure.com'),
+  tokens: require('./tokens/epq.json'),
+  contracts: require('./contracts/epq.json'),
+  dPathFormats: {
+    [SecureWalletName.TREZOR]: EXP_DEFAULT,
+    [SecureWalletName.LEDGER_NANO_S]: EXP_DEFAULT,
+    [InsecureWalletName.MNEMONIC_PHRASE]: EXP_DEFAULT
+  }
+};
+
 export const NETWORKS = {
-  ETH,
-  Ropsten,
-  Kovan,
-  Rinkeby,
-  ETC,
-  UBQ,
-  EXP
+  EPQ 
 };
 
 export type NetworkKeys = keyof typeof NETWORKS;
