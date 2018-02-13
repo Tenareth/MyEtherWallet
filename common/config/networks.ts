@@ -204,17 +204,17 @@ const EXP: NetworkConfig = {
 };
 
 const EPQ: NetworkConfig = {
-  name: 'EPQ,
+  name: 'EPQ',
   unit: 'ETH',
   chainId: 99999,
   color: '#673ab7',
-  blockExplorer: makeExplorer('http://etherdmhnd5i.centralus.cloudapp.azure.com'),
+  blockExplorer: makeExplorer('http://etherdmhnd5i.centralus.cloudapp.azure.com:8545'),
   tokens: require('./tokens/epq.json'),
   contracts: require('./contracts/epq.json'),
   dPathFormats: {
-    [SecureWalletName.TREZOR]: EXP_DEFAULT,
-    [SecureWalletName.LEDGER_NANO_S]: EXP_DEFAULT,
-    [InsecureWalletName.MNEMONIC_PHRASE]: EXP_DEFAULT
+    [SecureWalletName.TREZOR]: ETH_DEFAULT,
+    [SecureWalletName.LEDGER_NANO_S]: ETH_DEFAULT,
+    [InsecureWalletName.MNEMONIC_PHRASE]: ETH_DEFAULT
   }
 };
 
@@ -225,18 +225,19 @@ export const NETWORKS = {
 export type NetworkKeys = keyof typeof NETWORKS;
 
 enum NodeName {
-  ETH_MEW = 'eth_mew',
-  ETH_MYCRYPTO = 'eth_mycrypto',
-  ETH_ETHSCAN = 'eth_ethscan',
-  ETH_INFURA = 'eth_infura',
-  ROP_MEW = 'rop_mew',
-  ROP_INFURA = 'rop_infura',
-  KOV_ETHSCAN = 'kov_ethscan',
-  RIN_ETHSCAN = 'rin_ethscan',
-  RIN_INFURA = 'rin_infura',
-  ETC_EPOOL = 'etc_epool',
-  UBQ = 'ubq',
-  EXP_TECH = 'exp_tech'
+//  ETH_MEW = 'eth_mew',
+//  ETH_MYCRYPTO = 'eth_mycrypto',
+//  ETH_ETHSCAN = 'eth_ethscan',
+//  ETH_INFURA = 'eth_infura',
+//  ROP_MEW = 'rop_mew',
+//  ROP_INFURA = 'rop_infura',
+//  KOV_ETHSCAN = 'kov_ethscan',
+//  RIN_ETHSCAN = 'rin_ethscan',
+//  RIN_INFURA = 'rin_infura',
+//  ETC_EPOOL = 'etc_epool',
+//  UBQ = 'ubq',
+//  EXP_TECH = 'exp_tech',
+  EPQ_WEB3 = 'epq_web3'
 }
 
 type NonWeb3NodeConfigs = { [key in NodeName]: NodeConfig };
@@ -248,77 +249,83 @@ interface Web3NodeConfig {
 type NodeConfigs = NonWeb3NodeConfigs & Web3NodeConfig;
 
 export const NODES: NodeConfigs = {
-  eth_mew: {
-    network: 'ETH',
-    lib: new RPCNode('https://api.myetherapi.com/eth'),
-    service: 'MyEtherWallet',
-    estimateGas: true
-  },
-  eth_mycrypto: {
-    network: 'ETH',
-    lib: new RPCNode('https://api.mycryptoapi.com/eth'),
-    service: 'MyCrypto',
-    estimateGas: true
-  },
-  eth_ethscan: {
-    network: 'ETH',
-    service: 'Etherscan.io',
-    lib: new EtherscanNode('https://api.etherscan.io/api'),
+//   eth_mew: {
+//    network: 'ETH',
+//    lib: new RPCNode('https://api.myetherapi.com/eth'),
+//    service: 'MyEtherWallet',
+//    estimateGas: true
+//  },
+//  eth_mycrypto: {
+//    network: 'ETH',
+//    lib: new RPCNode('https://api.mycryptoapi.com/eth'),
+//    service: 'MyCrypto',
+//    estimateGas: true
+//  },
+//  eth_ethscan: {
+//    network: 'ETH',
+//    service: 'Etherscan.io',
+//    lib: new EtherscanNode('https://api.etherscan.io/api'),
+//    estimateGas: false
+//  },
+//  eth_infura: {
+//    network: 'ETH',
+//    service: 'infura.io',
+//    lib: new InfuraNode('https://mainnet.infura.io/mew'),
+//    estimateGas: false
+//  },
+//  rop_mew: {
+//    network: 'Ropsten',
+//    service: 'MyEtherWallet',
+//    lib: new RPCNode('https://api.myetherapi.com/rop'),
+//    estimateGas: false
+//  },
+//  rop_infura: {
+//    network: 'Ropsten',
+//    service: 'infura.io',
+//    lib: new InfuraNode('https://ropsten.infura.io/mew'),
+//    estimateGas: false
+//  },
+//  kov_ethscan: {
+//    network: 'Kovan',
+//    service: 'Etherscan.io',
+//    lib: new EtherscanNode('https://kovan.etherscan.io/api'),
+//    estimateGas: false
+//  },
+//  rin_ethscan: {
+//    network: 'Rinkeby',
+//    service: 'Etherscan.io',
+//    lib: new EtherscanNode('https://rinkeby.etherscan.io/api'),
+//    estimateGas: false
+//  },
+//  rin_infura: {
+//    network: 'Rinkeby',
+//    service: 'infura.io',
+//    lib: new InfuraNode('https://rinkeby.infura.io/mew'),
+//    estimateGas: false
+//  },
+//  etc_epool: {
+//    network: 'ETC',
+//    service: 'Epool.io',
+//    lib: new RPCNode('https://mewapi.epool.io'),
+//    estimateGas: false
+//  },
+//  ubq: {
+//    network: 'UBQ',
+//    service: 'ubiqscan.io',
+//    lib: new RPCNode('https://pyrus2.ubiqscan.io'),
+//    estimateGas: true
+//  },
+//  exp_tech: {
+//    network: 'EXP',
+//    service: 'Expanse.tech',
+//    lib: new RPCNode('https://node.expanse.tech/'),
+//    estimateGas: true
+//  },
+  epq_web3: {
+    network: 'EPQ',
+	lib: new Web3Node('https://myetherwallet.azurewebsites.net:8545/'),
+    service: 'Web3',
     estimateGas: false
-  },
-  eth_infura: {
-    network: 'ETH',
-    service: 'infura.io',
-    lib: new InfuraNode('https://mainnet.infura.io/mew'),
-    estimateGas: false
-  },
-  rop_mew: {
-    network: 'Ropsten',
-    service: 'MyEtherWallet',
-    lib: new RPCNode('https://api.myetherapi.com/rop'),
-    estimateGas: false
-  },
-  rop_infura: {
-    network: 'Ropsten',
-    service: 'infura.io',
-    lib: new InfuraNode('https://ropsten.infura.io/mew'),
-    estimateGas: false
-  },
-  kov_ethscan: {
-    network: 'Kovan',
-    service: 'Etherscan.io',
-    lib: new EtherscanNode('https://kovan.etherscan.io/api'),
-    estimateGas: false
-  },
-  rin_ethscan: {
-    network: 'Rinkeby',
-    service: 'Etherscan.io',
-    lib: new EtherscanNode('https://rinkeby.etherscan.io/api'),
-    estimateGas: false
-  },
-  rin_infura: {
-    network: 'Rinkeby',
-    service: 'infura.io',
-    lib: new InfuraNode('https://rinkeby.infura.io/mew'),
-    estimateGas: false
-  },
-  etc_epool: {
-    network: 'ETC',
-    service: 'Epool.io',
-    lib: new RPCNode('https://mewapi.epool.io'),
-    estimateGas: false
-  },
-  ubq: {
-    network: 'UBQ',
-    service: 'ubiqscan.io',
-    lib: new RPCNode('https://pyrus2.ubiqscan.io'),
-    estimateGas: true
-  },
-  exp_tech: {
-    network: 'EXP',
-    service: 'Expanse.tech',
-    lib: new RPCNode('https://node.expanse.tech/'),
-    estimateGas: true
   }
 };
 

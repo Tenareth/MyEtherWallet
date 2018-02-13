@@ -1,5 +1,5 @@
 import { BrowserWindow, Menu, shell } from 'electron';
-import { URL } from 'url';
+const { URL } = require('url');
 import MENU from './menu';
 import updater from './updater';
 const isDevelopment = process.env.NODE_ENV !== 'production';

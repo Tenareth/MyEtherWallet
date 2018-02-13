@@ -34,7 +34,7 @@ export interface State {
   latestBlock: string;
 }
 
-const defaultNode = 'eth_mew';
+const defaultNode = 'epq_web3';
 export const INITIAL_STATE: State = {
   languageSelection: 'en',
   nodeSelection: defaultNode,
